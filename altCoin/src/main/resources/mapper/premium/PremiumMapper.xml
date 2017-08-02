@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.altcoin.scheduler.premium.dao.PremiumMapper">
+
+   <select id="selectCodeValue" parameterType="java.lang.String" resultType="com.altcoin.scheduler.premium.vo.CodeVo">
+        SELECT
+        	CD_NO as cdNo
+        	, CD_CATEGORY as cdCategory
+        	, CD_KEY as cdKey
+        	, CD_VAL as cdVal
+        FROM TB_CODE 
+        WHERE IS_USE =1 AND CD_VAL = #{cdVal}
+    </select>
+    
+    <select id="selectCodeCategory" parameterType="java.lang.String" resultType="com.altcoin.scheduler.premium.vo.CodeVo">
+    	SELECT
+        	CD_NO as cdNo
+        	, CD_CATEGORY as cdCategory
+        	, CD_KEY as cdKey
+        	, CD_VAL as cdVal
+        FROM TB_CODE 
+        WHERE IS_USE =1 AND CD_CATEGORY = #{cdCategory}
+    </select>
+    
+    
+    <select id="selectUserInfo" parameterType="java.lang.String" resultType="com.altcoin.scheduler.premium.vo.UserVo">
+    	SELECT 
+    		USER_NO as userNo
+    		, USER_ID as userId
+    		, USER_PW as userPw
+    		, USER_EMAIL as userEmail
+    		, USER_MAX_DEAL as userMaxDeal
+    		, USER_MIN_DEAL as userMinDeal
+    		, MARGIN_RATE_CD as marginRateCd
+    		, IS_RUNNING as isRunning
+    		, IS_USE as isUse
+    	FROM TB_USER
+		WHERE USER_ID = #{userId}
+    </select>
+    
+    
+    
+    <insert id="insertExchangeRate" parameterType="com.altcoin.scheduler.premium.vo.ExchangeRateVo" >
+    	INSERT INTO
+    		TB_EXCHANGE_RATE(COUNTRY_CD, CURRENCY_CD, EXCHANGE_VALUE)
+    		VALUES(#{countryCd}, #{currencyCd}, #{exchangeValue})
+    </insert>
+    
+    
+    
+</mapper>
